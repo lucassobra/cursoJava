@@ -1,30 +1,25 @@
 package Exercicios;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import br.senai.sp.informatica.oo.Cliente;
-import br.senai.sp.informatica.oo.exemplos.objetos.heranca.Pessoa;
-import br.senai.sp.informatica.oo.gui.lib.SwUtil;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextField;
-import javax.swing.JTabbedPane;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.awt.event.ActionEvent;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EmptyBorder;
+
+import br.senai.sp.informatica.oo.gui.lib.SwUtil;
 
 public class Tela extends JFrame implements ActionListener {
 
