@@ -13,14 +13,14 @@ import java.util.List;
 // para concentrar o acesso a um determinado mecanismo
 // que forneça dados para uma aplicação
 */
-public class FornecedorDao {
+public class Enderecodao {
 	private Connection con;
 	private PreparedStatement incluir;
 	private PreparedStatement atualizar;
 	private PreparedStatement consultar;
 	private PreparedStatement remover;
 	
-	public FornecedorDao() throws DaoException {
+	public Enderecodao() throws DaoException {
 		try {
 			// Registrar o Driver JDBC
 			Class.forName("com.mysql.jdbc.Driver");
@@ -31,14 +31,14 @@ public class FornecedorDao {
 			
 			// Preparar os SQLs para a utilização posterior
 			incluir = con.prepareStatement(
-					"insert into fornecedor (nome, endereco) values (?,?)");
+					"insert into endereco (numero, logradouro, bairro, cep) values (?,?,?,?)");
 			
 			atualizar = con.prepareStatement(
-					"update fornecedor set nome=?, endereco=? where idfornecedor=?");
+					"update endereco set logradouro=?, numero=?, bairro=?, cep=? where idendereco=?");
 			
-			consultar = con.prepareStatement("select * from fornecedor");
+			consultar = con.prepareStatement("select * from endereco");
 			
-			remover = con.prepareStatement("delete fornecedor where idfornecedor=?");
+			remover = con.prepareStatement("delete endereco where idendereco=?");
 		} catch (ClassNotFoundException ex) {
 			throw new DaoException("O Driver JDBC não foi encontrato");
 		} catch (SQLException ex) {
@@ -48,22 +48,22 @@ public class FornecedorDao {
 	}
 	
 	// construção das rotinas que farão a gestão dos dados
-	public void incluir(Fornecedor obj) throws DaoException {
+	public void incluir(endereco obj) throws DaoException {
 		try {
 			incluir.setString(1, obj.getNome());
 			incluir.setString(2, obj.getEndereco());
 			incluir.execute();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
-			throw new DaoException("Falha ao incluir um Fornecedor");
+			throw new DaoException("Falha ao incluir um endereco");
 		}
 	}
 	
-	public void atualizar(Fornecedor obj) throws DaoException {
+	public void atualizar(endereco obj) throws DaoException {
 		try {
 			atualizar.setString(1, obj.getNome());
 			atualizar.setString(2, obj.getEndereco());
-			atualizar.setInt(3, obj.getIdfornecedor());
+			atualizar.setInt(3, obj.getendereco());
 			atualizar.execute();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -71,14 +71,14 @@ public class FornecedorDao {
 		}
 	}
 	
-	public List<Fornecedor> consultar() throws DaoException {
+	public List<endereco> consultar() throws DaoException {
 		try {
-			List<Fornecedor> lista = new ArrayList<>();
+			List<endereco> lista = new ArrayList<>();
 			
 			ResultSet resultado = consultar.executeQuery();
 			while(resultado.next()) {
-				Fornecedor obj = new Fornecedor();
-				obj.setIdfornecedor(resultado.getInt("idfornecedor"));
+				endereco obj = new endereco();
+				obj.setIdfornecedor(resultado.getInt("idendereco"));
 				obj.setNome(resultado.getString("nome"));
 				obj.setEndereco(resultado.getString("endereco"));
 				
@@ -88,7 +88,7 @@ public class FornecedorDao {
 			return lista;
 		} catch (SQLException ex) {
 			ex.printStackTrace();
-			throw new DaoException("Houve falha ao listar os Fornecedores");
+			throw new DaoException("Houve falha ao listar os endereco");
 		}
 	}
 	
